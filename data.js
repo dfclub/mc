@@ -19,7 +19,7 @@ window.MC_STATIC_DATA = {
     },
     // 首屏主视觉：活动标签、两行标题、副标题、特色标签、背景图
     "hero": {
-      "badge": "现在游玩就送点卷大礼包！",
+      "badge": "现在游玩就送大礼包！",
       "title_line1": "欢迎来到",
       "title_highlight": "Minecraft生存服",
       "subtitle": "由专业团队倾力打造的大型多人在线游戏，为您带来高质量的游戏体验",
