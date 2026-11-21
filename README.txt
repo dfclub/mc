@@ -12,12 +12,16 @@
   - 线上首页由后台接口动态填充的内容（服务器 IP、首屏标语、配置项、团队、相册、
     QQ/微信二维码、页脚版权等）已固化到 data.js，所以断开网络也能显示同样的内容。
 
-三、想改内容，改哪里
-  - 页面文字、段落、版块顺序：改 index.html（记事本 / VS Code 直接编辑保存即可）。
-  - 服务器 IP、首屏标语（"肝帝老哥""创世神"）、服务器配置、团队成员、相册说明、
-    QQ/微信二维码、页脚版权：改 data.js 对应字段
-    （content.site / hero / specs / help / features / gallery / team / community / footer）。
-    注意：data.js 里的值会覆盖 index.html 里的默认文字，改 HTML 不生效时先看 data.js。
+三、想改内容，改哪里（只改 index.html 就行）
+  - 页面上的文字：首屏标语、大标题、副标题、三个特色标签、配置卡片、教程三步、
+    特色卡、各版块标题、团队五人、社区两张卡、页脚版权 —— 全部直接在 index.html 里改。
+    改完双击「同步页面.bat」：脚本会把 index.html 里的文案抽出来写进 page-text.js
+    （页面立刻生效，不用再手改 data.js），接着自动提交并推送到 GitHub Pages。
+  - 为什么还要 page-text.js：页面运行时是按 data.js 的数据重建 DOM 的，
+    直接改 index.html 会被 data.js 的旧值盖回去；page-text.js 就是"以 index.html 为准"
+    的那一层，由脚本生成，不用手改、也别手改。
+  - 只有 index.html 里没有的东西才需要动 data.js：相册轮播的 5 张图和说明（gallery.items）、
+    各版块背景图（bg_image）、QQ/微信二维码路径、页签图标、服务器 IP。
   - 换图片：直接替换 png\、egg\、assets\ 下的同名文件即可（文件名不变就不用改代码）。
     页签图标在 assets\web\favicon.ico。
   - 样式：style.css；交互/动画：script.js（一般不用动）。
@@ -30,7 +34,8 @@
     和直接访问官网提交的效果一样（最多 3 张图、每张 ≤5MB、同一 IP 一分钟内最多 5 次）。
     需要联网 + 官网在线才能提交，断网时会提示"发送出错"。
   - 实时在线人数：data.js 里保存的是导出那一刻的值 "-"，不会实时刷新。
-  - 以后在 XAMPP 后台改了网站内容，这份副本不会自动同步，需要重新导出一份。
+  - 这份副本是独立的静态站：在 XAMPP 后台改网站内容，这里不会自动变；
+    想让线上官网也跟着变，要分别改（两边是两套文件）。
 
 五、验证记录
   - 用 Chrome 无头浏览器分别渲染"静态副本"和"线上官网"，对比渲染完成后的整个 DOM：
@@ -43,11 +48,11 @@
     提交一条测试留言，返回 HTTP 200、响应头含 Access-Control-Allow-Origin: *、
     内容为 {"success":true}，说明跨域提交能真正成功；测试留言已从后台删除。
 
-六、传到 GitHub Pages（用同一份文件即可）
+六、传到 GitHub Pages（本机已用 git 推送，网页上传只是备用）
   1. 打开 github.com，注册/登录后点 New repository，仓库名随意（例如 mc-site），
      可见性选 Public，不要勾选任何初始化文件，Create repository。
   2. 进入仓库页，点 "Add file" → "Upload files"，把本文件夹里的
-     index.html、script.js、data.js、style.css、favicon.ico、使用说明.txt
+     index.html、script.js、data.js、page-text.js、style.css、favicon.ico、README.txt
      以及 png、egg、assets 三个文件夹一起拖进去，然后 Commit changes。
   3. 进入仓库 Settings → Pages，Source 选 "Deploy from a branch"，
      Branch 选 main、目录选 /(root)，点 Save。
@@ -55,6 +60,9 @@
   注意：
   - 网页上传只能传文件、不能传 zip，所以要先解压再拖；文件多时可以直接
     把整个文件夹拖进上传框。
+  - page-text.js 必须一起上传，否则页面会退回 data.js 里的旧文案。
+  - 推送更新.bat、同步页面.bat、sync-page.py、同步报告.txt 是本机工具，
+    已被 .gitignore 排除，不用也不该传上去。
   - 网站上显示的仍是线上官网的域名内容（留言也提交到线上后台），
     GitHub Pages 只是又一个访问入口。
   - 公开仓库任何人都能看到源码；不想公开就把仓库设为 Private（Private 仓库
