@@ -35,6 +35,20 @@
         });
     }
 
+    // 页面文案覆盖层：由「同步页面.bat」从 index.html 抽取而成，
+    // 所以改完 index.html 的文字后双击一次脚本就能生效，不用再手改 data.js。
+    const PAGE_TEXT = (window.MC_PAGE_TEXT && window.MC_PAGE_TEXT.content) || {};
+    // 深合并（后者覆盖前者，数组整体替换）：只在需要覆盖的字段上生效
+    function deepMerge(base, patch) {
+        if (Array.isArray(patch)) return patch;
+        if (patch && typeof patch === 'object') {
+            const out = Object.assign({}, base && typeof base === 'object' ? base : {});
+            for (const key of Object.keys(patch)) out[key] = deepMerge(out[key], patch[key]);
+            return out;
+        }
+        return patch;
+    }
+
     // ============================================================
     // 1. State —— 跨模块共享状态
     // ============================================================
@@ -512,7 +526,8 @@
     const cms = {
         // 内容入口：取站点内容快照，按版块逐个应用，最后触发在线人数刷新
         init() {
-            staticResponse(STATIC_DATA.content || {})
+            // 数据 = data.js 快照 + index.html 抽出的文案覆盖层（后者优先）
+            staticResponse(deepMerge(STATIC_DATA.content || {}, PAGE_TEXT))
                 .then(r => r.ok ? r.json() : null)
                 .then(data => {
                     if (!data) return;

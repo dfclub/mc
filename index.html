@@ -678,7 +678,9 @@
     </footer>
     <!-- 先加载数据文件，script.js 依赖这里的 window.MC_STATIC_DATA -->
     <script src="data.js"></script>
+    <!-- 页面文案覆盖层：由「同步页面.bat」从本文件抽取生成，必须排在 data.js 之后 -->
+    <script src="page-text.js"></script>
     <!-- 主脚本：defer 延迟执行，等 DOM 解析完再跑 -->
-    <script src="script.js?v=8" defer></script>
+    <script src="script.js?v=9" defer></script>
 </body>
 </html>
