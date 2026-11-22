@@ -1,11 +1,11 @@
 /* 由「同步页面.bat」自动生成：从 index.html 抽取的页面文案，优先级高于 data.js。
  * 改完 index.html 双击 同步页面.bat 即可，不用手改这个文件。
- * 生成时间：2026-11-22 16:46:22
+ * 生成时间：2026-11-22 17:42:31
  */
 window.MC_PAGE_TEXT = {
   "content": {
     "footer": {
-      "copyright": "© 2026 我的世界服务器. 好想被超市~"
+      "copyright": "© 2026 dfclub"
     },
     "help": {
       "steps": [
