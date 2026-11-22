@@ -911,8 +911,8 @@
     // ============================================================
     // 11. ContactForm —— 联系表单 + 图片上传
     // ============================================================
-    // 提交去向：FormSubmit 免费转发，访客不用登录；所有留言只发团队 QQ 邮箱
-    const FEEDBACK_ENDPOINT = 'https://formsubmit.co/ajax/2365699927@qq.com';
+    // 提交去向：FormSubmit 免费转发，访客不用登录；所有留言只发团队邮箱
+    const FEEDBACK_ENDPOINT = 'https://formsubmit.co/ajax/dfclub20240926@163.com';
 
     const contactForm = {
         MAX_FILES: 3,
@@ -1043,7 +1043,7 @@
             return true;
         },
 
-        // 提交：先切换到"发送中"状态，再把内容发给 FormSubmit（只发 QQ 邮箱）
+        // 提交：先切换到"发送中"状态，再把内容发给 FormSubmit（只发一个邮箱）
         _submit(e) {
             e.preventDefault();
             const { form } = this.els;
@@ -1076,7 +1076,7 @@
             payload.append('_template', 'table');
             this.selectedFiles.forEach((file, i) => payload.append('附件' + (i + 1), file, file.name));
 
-            // 只发 QQ 邮箱一份，成功与否看 FormSubmit 的返回
+            // 只发一个邮箱，成功与否看 FormSubmit 的返回
             fetch(FEEDBACK_ENDPOINT, { method: 'POST', body: payload, headers: { 'Accept': 'application/json' } })
                 .then(r => r.json())
                 .then(d => {
@@ -1094,7 +1094,7 @@
                     }, 3000);
                 })
                 .catch(() => {
-                    alert('发送失败，请稍后再试；也可以直接发邮件到 2365699927@qq.com');
+                    alert('发送失败，请稍后再试；也可以直接发邮件到 dfclub20240926@163.com');
                     submitBtn.innerHTML = originalText;
                     submitBtn.style.opacity = '';
                     submitBtn.disabled = false;
