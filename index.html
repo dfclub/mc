@@ -25,14 +25,14 @@
     <link rel="dns-prefetch" href="https://mc.163.com">
     <link rel="dns-prefetch" href="https://www.minecraft.net">
     <!-- 预加载主样式表（v=3 是缓存版本号，改样式后可改数字强制刷新） -->
-    <link rel="preload" href="style.css?v=6" as="style">
+    <link rel="preload" href="style.css?v=7" as="style">
     <!-- 预加载主脚本 -->
     <link rel="preload" href="script.js?v=12" as="script">
     <!-- 预加载首屏背景大图，优先级设为 high -->
     <link rel="preload" href="./png/c6d2dd6a664242e2e5faa640d28c340b.jpg" as="image" fetchpriority="high">
     
     <!-- 真正引入样式表 -->
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=7">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -487,6 +487,12 @@
                         <a href="members/vibe.html" class="team-contact-btn">联系我</a>
                     </div>
                 </div>
+            </div>
+
+            <!-- 名单入口：轮播会一直转，找不到人时点这里进完整名单 -->
+            <div class="team-more scroll-fade-up delay-300">
+                <a class="team-more-btn" href="members/">查看全部 8 位成员 →</a>
+                <p class="team-more-note">轮播一直转，想找谁直接看名单：每人一个独立页面，写清他在服里负责什么，也能直接留言给他。</p>
             </div>
         </div>
     </section>

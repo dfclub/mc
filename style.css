@@ -932,3 +932,45 @@ body.has-announcement-popup {
     align-items: center;
     justify-content: center;
 }
+
+/* ========== 团队轮播下方的「查看全部成员」入口 ========== */
+.team-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 44px;
+}
+/* 按钮：白底胶囊，和卡片里的「联系我」同一语言 */
+.team-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 30px;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+.team-more-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(255, 255, 255, 0.28);
+    background: #f8fafc;
+}
+/* 小字说明：告诉用户名单页里能干什么 */
+.team-more-note {
+    margin: 0;
+    max-width: 520px;
+    text-align: center;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.55);
+}
+@media (max-width: 768px) {
+    .team-more { margin-top: 32px; }
+    .team-more-btn { padding: 11px 24px; font-size: 0.88rem; }
+}
