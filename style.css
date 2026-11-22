@@ -417,6 +417,7 @@ body.has-announcement-popup {
     transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     opacity: 1; transform: translate3d(0, 0, 0); box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     contain: layout style;
+    display: flex; flex-direction: column; align-items: center;
 }
 .spec-card.revealed { opacity: 1; transform: translate3d(0, 0, 0); }
 /* 四张卡片依次延迟入场 */
@@ -437,8 +438,8 @@ body.has-announcement-popup {
 .spec-card:hover .spec-icon-wrapper img { transform: scale(1.1); filter: drop-shadow(0 8px 15px rgba(0,0,0,0.4)); }
 /* 配置项标题 */
 .spec-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
-/* 配置项描述 */
-.spec-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px; line-height: 1.4; }
+/* 配置项描述：占满剩余高度，把数值胶囊压到卡片底部，四张卡对齐 */
+.spec-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px; line-height: 1.4; flex: 1 1 auto; }
 /* 配置数值胶囊：绿色描边 */
 .spec-value { font-size: 1rem; font-weight: 800; color: var(--accent-green); padding: 6px 12px; background: rgba(0, 230, 118, 0.1); border-radius: 6px; display: inline-block; border: 1px solid rgba(0, 230, 118, 0.3); }
 
@@ -506,8 +507,8 @@ body.has-announcement-popup {
 .team-card:hover .team-avatar { border-color: #4ade80; transform: scale(1.05); }
 /* 成员名称：预留两行高度，长名字换行也能让职位/简介上下对齐 */
 .team-name { font-size: 1.15rem; line-height: 1.35; color: #fff; margin-bottom: 8px; min-height: 2.7em; display: flex; align-items: center; justify-content: center; }
-/* 成员职位：绿色小字 */
-.team-role { font-size: 0.9rem; color: #4ade80; letter-spacing: 1px; margin-bottom: 15px; font-weight: 600; }
+/* 成员职位：绿色小字；预留两行高度，职位长短不同也能让简介对齐 */
+.team-role { font-size: 0.9rem; color: #4ade80; letter-spacing: 1px; margin-bottom: 15px; font-weight: 600; min-height: 2.6em; display: flex; align-items: center; justify-content: center; }
 /* 成员简介 */
 .team-desc { font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; flex: 1 1 auto; }
 /* 简介高度不一时，按钮统一贴卡片底部 */
