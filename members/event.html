@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冷雨舒 · 活动策划 · Event Host｜DFClub 我的世界服</title>
+<meta name="description" content="DFClub 我的世界服成员 冷雨舒（活动策划 · Event Host）：节日活动、建筑比赛、群公告。在这里看他在服里负责什么，也可以直接给他留言。">
+<link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="inner">
+    <a class="brand" href="../index.html"><i class="cube"></i><span>DFCLUB 我的世界服</span></a>
+    <nav class="nav">
+      <a href="../index.html">首页</a>
+      <a href="../index.html#specs">配置</a>
+      <a href="../index.html#help-docs">帮助</a>
+      <a href="../index.html#team">团队</a>
+      <a href="../index.html#contact">联系</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <a class="back" href="../index.html#team">← 返回团队名单</a>
+
+  <section class="profile">
+    <div class="avatar"><img src="../egg/av7.png" alt="冷雨舒的头像"></div>
+    <div>
+      <p class="eyebrow">DFClub 成员 · 第 7 位</p>
+      <h1>冷雨舒</h1>
+      <p class="role">活动策划 · Event Host</p>
+      <span class="tagline">节日活动、建筑比赛、群公告</span>
+      <p class="bio">节日活动、建筑比赛和群公告都由他发起，服务器里最会搞气氛的一个。想提活动点子、想一起办比赛，直接找他，他手上常年备着几套方案。</p>
+      <h2>他在服里负责</h2>
+      <ul class="duties">      <li>节日活动、建筑比赛、跑酷赛的策划与执行</li>
+      <li>群公告、活动报名和奖励发放的协调</li>
+      <li>收集玩家想玩什么，排进活动日历</li></ul>
+    </div>
+  </section>
+
+  <div class="two">
+    <div class="box">
+      <h3>这些事找他</h3>
+      <p>想参加活动、有活动点子、想一起办比赛</p>
+    </div>
+    <div class="box">
+      <h3>这些事别找他</h3>
+      <p>白名单、领地权限、插件报错 —— 这些有别人负责，找错人会慢一步。</p>
+    </div>
+  </div>
+
+  <section class="contact-card">
+    <h2>给 冷雨舒 留言</h2>
+    <p>留言会通过 FormSubmit 发到团队的两个邮箱（163 与 QQ），他上线后会看到；紧急的事直接在群里 @ 他更快。</p>
+    <form action="https://formsubmit.co/guaidao1412_1996@163.com" method="POST">
+      <input type="hidden" name="_subject" value="【DFClub我的世界服】给冷雨舒的留言">
+      <input type="hidden" name="_cc" value="2365699927@qq.com">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://dfclub.github.io/mc/members/event.html?sent=1">
+      <input type="hidden" name="收件成员" value="冷雨舒（活动策划 · Event Host）">
+      <label>你的游戏 ID / 昵称
+        <input type="text" name="昵称" placeholder="比如 Steve_233" required>
+      </label>
+      <label>回复邮箱
+        <input type="email" name="邮箱" placeholder="你的QQ号@qq.com" required>
+      </label>
+      <label>留言内容
+        <textarea name="留言" placeholder="写清楚发生时间、坐标、游戏 ID，能附截图链接更好" required></textarea>
+      </label>
+      <button class="submit" type="submit">直接提交</button>
+    </form>
+    <div class="tip" id="sentTip">已提交。如果邮箱里没收到转发确认，说明发送失败，请在群里 @ 他。</div>
+  </section>
+</main>
+
+<footer>
+  <p>DFClub 我的世界服 · 本站为玩家自建，与 Mojang / Microsoft 无关</p>
+  <p><a href="../index.html">返回首页</a> · <a href="https://github.com/dfclub">GitHub</a></p>
+</footer>
+
+<script>
+  if (location.search.indexOf('sent=1') !== -1) document.getElementById('sentTip').style.display = 'block';
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC第一入 · 版本验收 · QA Lead｜DFClub 我的世界服</title>
+<meta name="description" content="DFClub 我的世界服成员 MC第一入（版本验收 · QA Lead）：新版本上线前先过他这关。在这里看他在服里负责什么，也可以直接给他留言。">
+<link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="inner">
+    <a class="brand" href="../index.html"><i class="cube"></i><span>DFCLUB 我的世界服</span></a>
+    <nav class="nav">
+      <a href="../index.html">首页</a>
+      <a href="../index.html#specs">配置</a>
+      <a href="../index.html#help-docs">帮助</a>
+      <a href="../index.html#team">团队</a>
+      <a href="../index.html#contact">联系</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <a class="back" href="../index.html#team">← 返回团队名单</a>
+
+  <section class="profile">
+    <div class="avatar"><img src="../egg/av3.png" alt="MC第一入的头像"></div>
+    <div>
+      <p class="eyebrow">DFClub 成员 · 第 3 位</p>
+      <h1>MC第一入</h1>
+      <p class="role">版本验收 · QA Lead</p>
+      <span class="tagline">新版本上线前先过他这关</span>
+      <p class="bio">新版本、新插件、新地图上线之前，先在他那儿跑一遍：出生点会不会卡、刷怪塔还炸不炸、红石机器还转不转、手机端进来会不会掉帧。他挑出来的毛病，一般都会改掉再上线。</p>
+      <h2>他在服里负责</h2>
+      <ul class="duties">      <li>新版本 / 新插件上线前的完整走查</li>
+      <li>复现玩家报的 bug，写清楚触发条件</li>
+      <li>手机端、低配机器进服的兼容性检查</li></ul>
+    </div>
+  </section>
+
+  <div class="two">
+    <div class="box">
+      <h3>这些事找他</h3>
+      <p>发现 bug、想帮忙测试新东西、版本更新后哪里不对</p>
+    </div>
+    <div class="box">
+      <h3>这些事别找他</h3>
+      <p>要白名单、要领地权限、活动报名 —— 这些有别人负责，找错人会慢一步。</p>
+    </div>
+  </div>
+
+  <section class="contact-card">
+    <h2>给 MC第一入 留言</h2>
+    <p>留言会通过 FormSubmit 发到团队的两个邮箱（163 与 QQ），他上线后会看到；紧急的事直接在群里 @ 他更快。</p>
+    <form action="https://formsubmit.co/guaidao1412_1996@163.com" method="POST">
+      <input type="hidden" name="_subject" value="【DFClub我的世界服】给MC第一入的留言">
+      <input type="hidden" name="_cc" value="2365699927@qq.com">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://dfclub.github.io/mc/members/qa.html?sent=1">
+      <input type="hidden" name="收件成员" value="MC第一入（版本验收 · QA Lead）">
+      <label>你的游戏 ID / 昵称
+        <input type="text" name="昵称" placeholder="比如 Steve_233" required>
+      </label>
+      <label>回复邮箱
+        <input type="email" name="邮箱" placeholder="你的QQ号@qq.com" required>
+      </label>
+      <label>留言内容
+        <textarea name="留言" placeholder="写清楚发生时间、坐标、游戏 ID，能附截图链接更好" required></textarea>
+      </label>
+      <button class="submit" type="submit">直接提交</button>
+    </form>
+    <div class="tip" id="sentTip">已提交。如果邮箱里没收到转发确认，说明发送失败，请在群里 @ 他。</div>
+  </section>
+</main>
+
+<footer>
+  <p>DFClub 我的世界服 · 本站为玩家自建，与 Mojang / Microsoft 无关</p>
+  <p><a href="../index.html">返回首页</a> · <a href="https://github.com/dfclub">GitHub</a></p>
+</footer>
+
+<script>
+  if (location.search.indexOf('sent=1') !== -1) document.getElementById('sentTip').style.display = 'block';
+</script>
+</body>
+</html>
