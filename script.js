@@ -911,11 +911,8 @@
     // ============================================================
     // 11. ContactForm —— 联系表单 + 图片上传
     // ============================================================
-    // 提交去向：FormSubmit 免费转发，访客不用登录；两个邮箱各发一份
-    const FEEDBACK_ENDPOINTS = [
-        'https://formsubmit.co/ajax/guaidao1412_1996@163.com',
-        'https://formsubmit.co/ajax/2365699927@qq.com'
-    ];
+    // 提交去向：FormSubmit 免费转发，访客不用登录；所有留言只发团队 QQ 邮箱
+    const FEEDBACK_ENDPOINT = 'https://formsubmit.co/ajax/2365699927@qq.com';
 
     const contactForm = {
         MAX_FILES: 3,
@@ -1046,7 +1043,7 @@
             return true;
         },
 
-        // 提交：先切换到"发送中"状态，再把内容发给 FormSubmit（两个邮箱各一份）
+        // 提交：先切换到"发送中"状态，再把内容发给 FormSubmit（只发 QQ 邮箱）
         _submit(e) {
             e.preventDefault();
             const { form } = this.els;
@@ -1079,18 +1076,12 @@
             payload.append('_template', 'table');
             this.selectedFiles.forEach((file, i) => payload.append('附件' + (i + 1), file, file.name));
 
-            // 两个邮箱并发发送；任意一个成功就算送达
-            const jobs = FEEDBACK_ENDPOINTS.map(url =>
-                fetch(url, { method: 'POST', body: payload, headers: { 'Accept': 'application/json' } })
-                    .then(r => r.json())
-                    .then(d => String(d.success) === 'true')
-                    .catch(() => false)
-            );
-
-            Promise.all(jobs).then(results => {
-                const okCount = results.filter(Boolean).length;
-                if (okCount > 0) {
-                    submitBtn.innerHTML = '<span>' + (okCount === results.length ? '发送成功！' : '已发送（一个邮箱未送达）') + '</span>';
+            // 只发 QQ 邮箱一份，成功与否看 FormSubmit 的返回
+            fetch(FEEDBACK_ENDPOINT, { method: 'POST', body: payload, headers: { 'Accept': 'application/json' } })
+                .then(r => r.json())
+                .then(d => {
+                    if (String(d.success) !== 'true') throw new Error('formsubmit');
+                    submitBtn.innerHTML = '<span>发送成功！</span>';
                     submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
                     submitBtn.style.opacity = '1';
                     form.reset();
@@ -1101,13 +1092,13 @@
                         submitBtn.style.background = '';
                         submitBtn.disabled = false;
                     }, 3000);
-                } else {
+                })
+                .catch(() => {
                     alert('发送失败，请稍后再试；也可以直接发邮件到 2365699927@qq.com');
                     submitBtn.innerHTML = originalText;
                     submitBtn.style.opacity = '';
                     submitBtn.disabled = false;
-                }
-            });
+                });
         },
 
         // 时间戳：随邮件一起发出，方便回查
