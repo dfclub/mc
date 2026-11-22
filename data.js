@@ -8,10 +8,10 @@ window.MC_STATIC_DATA = {
   "content": {
     // 站点基础信息：标题、描述、服务器 IP、LOGO 文字、页签图标、版本模式
     "site": {
-      "title": "我的世界生存服",
+      "title": "DFClub 我的世界服",
       "description": "大型多人在线生存服务器，提供纯净生存、RPG冒险、建筑创造等多种玩法。",
-      "server_ip": "play.example.com",
-      "logo_text": "我的世界服务器",
+      "server_ip": "暂未开放",
+      "logo_text": "DFClub 我的世界服",
       "logo_image": "",
       "favicon_ico": "./assets/web/favicon.ico",
       "server_mode": "international",
@@ -118,23 +118,23 @@ window.MC_STATIC_DATA = {
       "items": [
         {
           "src": "./png/f5ea0ca06bf5ac36704b7277536ab53d.jpg",
-          "caption": "宏伟的主城大厅"
+          "caption": "出生点主城：第一次上线都会站在这儿"
         },
         {
           "src": "./png/5e1e1be033cbd911e62327519886379f.jpg",
-          "caption": "精美的玩家建筑"
+          "caption": "玩家投稿的建筑，审核通过后挂进世界"
         },
         {
           "src": "./png/9cca3afcca8c0a79eac6a39aad5d65ec.jpg",
-          "caption": "广阔的生存世界"
+          "caption": "往外走几千格，还是没被踩过的地形"
         },
         {
           "src": "./egg/img1_bcd004c0.jpg",
-          "caption": "热闹的活动现场"
+          "caption": "节日活动合影，那天服务器差点满员"
         },
         {
           "src": "./egg/img2_ab032cdc.jpg",
-          "caption": "激情的PVP对战"
+          "caption": "临时搭的竞技场，打完就拆"
         }
       ]
     },
@@ -203,12 +203,16 @@ window.MC_STATIC_DATA = {
       // 友情链接：会重建页脚第三列
       "friend_links": [
         {
-          "name": "我的世界官网",
-          "url": "https://mc.163.com/"
+          "name": "DFClub 官网",
+          "url": "https://dfclub.github.io/"
         },
         {
-          "name": "我的世界国际服",
-          "url": "https://www.minecraft.net/"
+          "name": "DFClub 打洲社",
+          "url": "https://dfclub.github.io/delta/index.html"
+        },
+        {
+          "name": "GitHub 主页",
+          "url": "https://github.com/dfclub"
         }
       ]
     }
