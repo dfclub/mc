@@ -146,7 +146,13 @@
     function safeLink(el, url) {
         if (!el || !url) return;
         if (typeof url === 'string') {
+            // 站内页面（如 members/owner.html、./team.html）按相对路径直接使用
+            const isPagePath = !/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(url)
+                && !url.includes(' ')
+                && /^[./]?[A-Za-z0-9_-]+(?:[/\\][A-Za-z0-9_-]+)*\.(?:html?|php)(?:[?#].*)?$/.test(url);
             if (url.startsWith('https://') || url.startsWith('http://') || url.startsWith('#') || url.startsWith('/')) {
+                el.href = url;
+            } else if (isPagePath) {
                 el.href = url;
             } else if (/^[a-zA-Z0-9]/.test(url) && url.includes('.')) {
                 el.href = 'https://' + url;

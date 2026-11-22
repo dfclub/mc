@@ -1,6 +1,6 @@
 /* 由「同步页面.bat」自动生成：从 index.html 抽取的页面文案，优先级高于 data.js。
  * 改完 index.html 双击 同步页面.bat 即可，不用手改这个文件。
- * 生成时间：2026-11-22 18:45:45
+ * 生成时间：2026-11-22 18:52:19
  */
 window.MC_PAGE_TEXT = {
   "content": {
@@ -95,49 +95,57 @@ window.MC_PAGE_TEXT = {
           "name": "有钱的e1狙击枪",
           "role": "服主 · Server Owner",
           "desc": "拍板开服的那个人：定服务器方向、出机器和带宽的钱，也在群里答「到底什么时候开新档」。",
-          "avatar": "./egg/av1.png"
+          "avatar": "./egg/av1.png",
+          "contact_link": "members/owner.html"
         },
         {
           "name": "锦鲤~嫣然",
           "role": "副服主 · Co-Owner",
           "desc": "排期、招人和新人带教都归她；服主不在线的时候，服务器谁说了算——她。",
-          "avatar": "./egg/av2.png"
+          "avatar": "./egg/av2.png",
+          "contact_link": "members/co-owner.html"
         },
         {
           "name": "MC第一入",
           "role": "版本验收 · QA Lead",
           "desc": "新版本和新插件上线前先过他那关：出生点能不能走、刷怪塔还炸不炸、红石还转不转。",
-          "avatar": "./egg/av3.png"
+          "avatar": "./egg/av3.png",
+          "contact_link": "members/qa.html"
         },
         {
           "name": "闲趣饼干asdjkl",
           "role": "资产与领地 · Admin",
           "desc": "管账号白名单、领地权限和资源分配，谁被误封、谁的箱子被撬，找他处理最快。",
-          "avatar": "./egg/av4.png"
+          "avatar": "./egg/av4.png",
+          "contact_link": "members/economy.html"
         },
         {
           "name": "visd徐",
           "role": "技术管理 · Technical Admin",
           "desc": "插件、生电优化、备份与回档都归他；TPS 一掉，第一个冲进后台的就是这个人。",
-          "avatar": "./egg/av5.png"
+          "avatar": "./egg/av5.png",
+          "contact_link": "members/tech.html"
         },
         {
           "name": "刘老师3451",
           "role": "建筑管理 · Builder",
           "desc": "主城、出生点和公共工程的设计施工，也负责审核玩家投稿的建筑能不能上墙。",
-          "avatar": "./egg/av6.png"
+          "avatar": "./egg/av6.png",
+          "contact_link": "members/builder.html"
         },
         {
           "name": "冷雨舒",
           "role": "活动策划 · Event Host",
           "desc": "节日活动、建筑比赛和群公告都由他发起，服务器里最会搞气氛的一个。",
-          "avatar": "./egg/av7.png"
+          "avatar": "./egg/av7.png",
+          "contact_link": "members/event.html"
         },
         {
           "name": "牛牛",
           "role": "气氛组 · Vibe Officer",
           "desc": "不开荒也不搬砖，专职在群里整活、在出生点陪聊，服务器的快乐基本由他提供。",
-          "avatar": "./egg/av8.png"
+          "avatar": "./egg/av8.png",
+          "contact_link": "members/vibe.html"
         }
       ],
       "subtitle": "服里所有事都是这几个人在做：从开服决策到修一个卡住的刷怪塔",
