@@ -179,15 +179,7 @@
                         entry.hidden = true;
                         return;
                     }
-                    entry.hidden = false;
-                    if (data.logged_in) {
-                        let html = '<a href="https://mcserver.tailaf01bf.ts.net/user/panel.php" class="nav-register-btn">' + (data.username || '用户中心') + '</a>';
-                        if (data.unread_notifications > 0) {
-                            html += ' <a href="https://mcserver.tailaf01bf.ts.net/user/panel.php?tab=notifications" class="nav-notif-badge" title="未读通知">' + data.unread_notifications + '</a>';
-                        }
-                        html += ' <a href="https://mcserver.tailaf01bf.ts.net/user/login.php?action=logout" class="nav-logout-link">退出</a>';
-                        entry.innerHTML = html;
-                    }
+                    // 全站已静态化，不再提供用户中心/登录入口
                 })
                 .catch(() => {});
         }
