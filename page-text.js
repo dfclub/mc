@@ -1,6 +1,6 @@
 /* 由「同步页面.bat」自动生成：从 index.html 抽取的页面文案，优先级高于 data.js。
  * 改完 index.html 双击 同步页面.bat 即可，不用手改这个文件。
- * 生成时间：2026-11-22 19:14:35
+ * 生成时间：2026-11-22 19:46:11
  */
 window.MC_PAGE_TEXT = {
   "content": {
@@ -106,7 +106,7 @@ window.MC_PAGE_TEXT = {
           "contact_link": "members/co-owner.html"
         },
         {
-          "name": "MC第一入",
+          "name": "WolfKingの鼠",
           "role": "版本验收 · QA Lead",
           "desc": "新版本和新插件上线前先过他那关：出生点能不能走、刷怪塔还炸不炸、红石还转不转。",
           "avatar": "./egg/av3.png",
