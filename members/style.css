@@ -78,23 +78,84 @@ footer a { color: var(--dim); }
 }
 
 /* ========== 「全部成员」名单页 ========== */
-.roster-head { margin-bottom: 34px; }
-.roster-head h1 { font-size: 32px; margin: 0 0 12px; }
+.roster-head { margin-bottom: 32px; }
+.roster-head h1 { font-size: 34px; margin: 0 0 12px; letter-spacing: -.01em; }
 .roster-intro { margin: 0; max-width: 720px; color: var(--dim); font-size: 14px; }
-.roster { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.roster-card {
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 24px 18px 18px; border-radius: 20px; text-decoration: none;
-  background: var(--card); border: 1px solid var(--line);
-  transition: transform .25s, border-color .25s, box-shadow .25s;
+
+.roster {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 20px;
+  counter-reset: rcard;
 }
-.roster-card:hover { transform: translateY(-5px); border-color: rgba(74,222,128,.45); box-shadow: 0 18px 34px rgba(0,0,0,.35); }
-.roster-avatar { width: 104px; height: 104px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,.18); background: rgba(255,255,255,.04); }
-.roster-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.roster-name { font-size: 17px; margin: 16px 0 6px; line-height: 1.35; word-break: break-word; }
-.roster-role { margin: 0 0 10px; color: var(--green); font-size: 13px; font-weight: 700; }
-.roster-tag { margin: 0 0 10px; padding: 4px 10px; border-radius: 999px; font-size: 12px; color: var(--green);
-  background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.28); }
-.roster-more { margin-top: auto; width: 100%; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; color: var(--green); }
-@media (max-width: 900px) { .roster { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .roster { grid-template-columns: 1fr; } .roster-head h1 { font-size: 26px; } }
+.roster-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr auto;
+  column-gap: 16px;
+  padding: 22px 22px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .015));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
+  text-decoration: none;
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, background .22s ease;
+}
+.roster-card::before {
+  counter-increment: rcard;
+  content: counter(rcard, decimal-leading-zero);
+  position: absolute; top: 18px; right: 20px;
+  font: 600 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+  color: rgba(232, 238, 247, .28);
+}
+.roster-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(74, 222, 128, .42);
+  background: linear-gradient(180deg, rgba(74, 222, 128, .10), rgba(255, 255, 255, .02));
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .40);
+}
+.roster-avatar {
+  grid-column: 1; grid-row: 1 / span 2;
+  width: 64px; height: 64px; border-radius: 14px; overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .04);
+}
+.roster-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; image-rendering: pixelated; }
+.roster-name {
+  grid-column: 2; grid-row: 1;
+  margin: 3px 0 6px; padding-right: 30px;
+  font-size: 17px; font-weight: 700; line-height: 1.35; letter-spacing: .01em;
+  word-break: break-word;
+}
+.roster-role {
+  grid-column: 2; grid-row: 2;
+  margin: 0; font-size: 12px; letter-spacing: .04em;
+  color: rgba(74, 222, 128, .86);
+}
+.roster-tag {
+  grid-column: 1 / -1; grid-row: 3;
+  align-self: start;
+  margin: 16px 0 0;
+  font-size: 12.5px; line-height: 1.65; color: rgba(232, 238, 247, .62);
+}
+.roster-more {
+  grid-column: 1 / -1; grid-row: 4;
+  margin-top: 16px; padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12.5px; color: var(--green);
+}
+.roster-more i { font-style: normal; transition: transform .22s ease; }
+.roster-card:hover .roster-more i { transform: translateX(3px); }
+
+@media (max-width: 1000px) {
+  .roster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .roster { grid-template-columns: 1fr; gap: 16px; }
+  .roster-head h1 { font-size: 26px; }
+  .roster-card { padding: 18px 18px 16px; }
+}
