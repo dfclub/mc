@@ -913,9 +913,16 @@
     // ============================================================
     // 11. ContactForm —— 联系表单 + 图片上传
     // ============================================================
+    // 提交去向：FormSubmit 免费转发，访客不用登录；两个邮箱各发一份
+    const FEEDBACK_ENDPOINTS = [
+        'https://formsubmit.co/ajax/guaidao1412_1996@163.com',
+        'https://formsubmit.co/ajax/2365699927@qq.com'
+    ];
+
     const contactForm = {
         MAX_FILES: 3,
-        MAX_SIZE: 5 * 1024 * 1024,
+        MAX_SIZE: 5 * 1024 * 1024,      // 单张上限 5MB
+        MAX_TOTAL: 10 * 1024 * 1024,    // FormSubmit 一次提交的附件总量上限 10MB
         selectedFiles: [],
         els: {},
 
@@ -966,13 +973,18 @@
             });
         },
 
-        // 校验并收集图片：最多 3 张、单张 ≤5MB、只收图片类型
+        // 校验并收集图片：最多 3 张、单张 ≤5MB、合计 ≤10MB、只收图片类型
         _addFiles(files) {
             for (const file of files) {
                 if (this.selectedFiles.length >= this.MAX_FILES) break;
                 if (!file.type.startsWith('image/')) continue;
                 if (file.size > this.MAX_SIZE) {
                     alert('图片 "' + file.name + '" 超过5MB限制');
+                    continue;
+                }
+                const total = this.selectedFiles.reduce((sum, f) => sum + f.size, 0) + file.size;
+                if (total > this.MAX_TOTAL) {
+                    alert('图片合计不能超过10MB，"' + file.name + '" 没加上');
                     continue;
                 }
                 this.selectedFiles.push(file);
@@ -1005,10 +1017,10 @@
             });
             if (hint) hint.textContent = this.selectedFiles.length > 0
                 ? this.selectedFiles.length + '/3 张'
-                : '最多3张，每张≤5MB';
+                : '最多3张，合计≤10MB';
         },
 
-        // 提交：先切换到"发送中"状态，再组装 FormData 提交
+        // 提交：先切换到"发送中"状态，再把内容发给 FormSubmit（两个邮箱各一份）
         _submit(e) {
             e.preventDefault();
             const { form } = this.els;
@@ -1018,43 +1030,64 @@
             submitBtn.style.opacity = '0.8';
             submitBtn.disabled = true;
 
-            // 组装 FormData：字段取自表单，图片单独按 image_0..N 追加，删除原生 attachments 字段
-            const formData = new FormData(form);
-            formData.delete('attachments');
-            this.selectedFiles.forEach((file, i) => formData.append('image_' + i, file));
+            // 组装 FormData：字段名用中文方便读邮件，图片按 附件1..N 追加（FormSubmit 上限 10MB）
+            const payload = new FormData();
+            const nameEl = form.querySelector('#name');
+            const emailEl = form.querySelector('#email');
+            const subjectEl = form.querySelector('#subject');
+            const msgEl = form.querySelector('#message');
+            const subjectText = subjectEl && subjectEl.selectedIndex >= 0
+                ? subjectEl.options[subjectEl.selectedIndex].text
+                : '';
+            const content = msgEl ? msgEl.value.trim() : '';
 
-            // 提交到线上公开接口；服务端已放开跨域，静态副本和 GitHub Pages 都能读到响应
-            fetch('https://mcserver.tailaf01bf.ts.net/admin/public_api.php?act=submit_message', { method: 'POST', body: formData })
-                .then(r => r.json())
-                .then(result => {
-                    // 成功：按钮变绿显示"发送成功！"，清空表单与图片，3 秒后复原
-                    if (result.success) {
-                        submitBtn.innerHTML = '<span>发送成功！</span>';
-                        submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-                        submitBtn.style.opacity = '1';
-                        form.reset();
-                        this.selectedFiles = [];
-                        this._renderPreview();
-                        setTimeout(() => {
-                            submitBtn.innerHTML = originalText;
-                            submitBtn.style.background = '';
-                            submitBtn.disabled = false;
-                        }, 3000);
-                    // 业务失败（邮箱格式、频率限制等）：弹出后端返回的具体原因
-                    } else {
-                        alert('发送失败: ' + result.message);
+            payload.append('昵称', nameEl ? nameEl.value.trim() : '');
+            payload.append('联系邮箱', emailEl ? emailEl.value.trim() : '');
+            payload.append('主题', subjectText);
+            payload.append('详细内容', content);
+            payload.append('页面', location.href);
+            payload.append('时间', this._stamp());
+            payload.append('_subject', '【我的世界官网】' + (subjectText ? '[' + subjectText + '] ' : '') + content.replace(/\s+/g, ' ').slice(0, 24));
+            payload.append('_captcha', 'false');
+            payload.append('_template', 'table');
+            this.selectedFiles.forEach((file, i) => payload.append('附件' + (i + 1), file, file.name));
+
+            // 两个邮箱并发发送；任意一个成功就算送达
+            const jobs = FEEDBACK_ENDPOINTS.map(url =>
+                fetch(url, { method: 'POST', body: payload, headers: { 'Accept': 'application/json' } })
+                    .then(r => r.json())
+                    .then(d => String(d.success) === 'true')
+                    .catch(() => false)
+            );
+
+            Promise.all(jobs).then(results => {
+                const okCount = results.filter(Boolean).length;
+                if (okCount > 0) {
+                    submitBtn.innerHTML = '<span>' + (okCount === results.length ? '发送成功！' : '已发送（一个邮箱未送达）') + '</span>';
+                    submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    submitBtn.style.opacity = '1';
+                    form.reset();
+                    this.selectedFiles = [];
+                    this._renderPreview();
+                    setTimeout(() => {
                         submitBtn.innerHTML = originalText;
-                        submitBtn.style.opacity = '';
+                        submitBtn.style.background = '';
                         submitBtn.disabled = false;
-                    }
-                })
-                // 网络或跨域异常：提示稍后重试并复原按钮
-                .catch(() => {
-                    alert('发送出错，请稍后重试');
+                    }, 3000);
+                } else {
+                    alert('发送失败，请稍后再试；也可以直接发邮件到 2365699927@qq.com');
                     submitBtn.innerHTML = originalText;
                     submitBtn.style.opacity = '';
                     submitBtn.disabled = false;
-                });
+                }
+            });
+        },
+
+        // 时间戳：随邮件一起发出，方便回查
+        _stamp() {
+            const d = new Date();
+            const p = n => (String(n).length < 2 ? '0' + n : String(n));
+            return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
         }
     };
 
