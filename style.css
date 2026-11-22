@@ -623,6 +623,8 @@ body.has-announcement-popup {
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #10b981; background: rgba(0, 0, 0, 0.5); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
 /* 下拉选项在深色系统菜单里的配色 */
 .form-group select option { background: #1a1a2e; color: #fff; }
+/* 必填未填/邮箱格式错误：红框提示 */
+.contact-form .is-invalid { border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important; }
 /* 提交按钮：绿色渐变 */
 .submit-btn { margin-top: 10px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; position: relative; overflow: hidden; }
 /* 悬停：上浮 + 绿色投影 */

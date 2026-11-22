@@ -942,6 +942,10 @@
             this._bindUpload();
             this._bindDragDrop();
             form.addEventListener('submit', (e) => this._submit(e));
+            // 重新输入时清掉红框
+            form.addEventListener('input', (e) => {
+                if (e.target && e.target.classList) e.target.classList.remove('is-invalid');
+            });
         },
 
         // 点击"添加图片"按钮时转发到真正的文件选择框，选完立即加入待上传列表
@@ -1020,10 +1024,35 @@
                 : '最多3张，合计≤10MB';
         },
 
+        // 必填与邮箱格式：缺项或邮箱写错都不发
+        _check(form) {
+            const nameEl = form.querySelector('#name');
+            const emailEl = form.querySelector('#email');
+            const subjectEl = form.querySelector('#subject');
+            const msgEl = form.querySelector('#message');
+            const fail = (el, msg) => {
+                if (el) {
+                    el.classList.add('is-invalid');
+                    el.setAttribute('aria-invalid', 'true');
+                    el.focus();
+                }
+                alert(msg);
+                return false;
+            };
+            if (!nameEl || !nameEl.value.trim()) return fail(nameEl, '请填写昵称');
+            const mail = emailEl ? emailEl.value.trim() : '';
+            if (!mail) return fail(emailEl, '请填写联系邮箱');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) return fail(emailEl, '邮箱格式不对，请检查（例如 name@example.com）');
+            if (!subjectEl || subjectEl.selectedIndex < 0) return fail(subjectEl, '请选择主题');
+            if (!msgEl || !msgEl.value.trim()) return fail(msgEl, '请填写详细内容');
+            return true;
+        },
+
         // 提交：先切换到"发送中"状态，再把内容发给 FormSubmit（两个邮箱各一份）
         _submit(e) {
             e.preventDefault();
             const { form } = this.els;
+            if (!this._check(form)) return;
             const submitBtn = form.querySelector('.submit-btn');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span>发送中...</span>';
