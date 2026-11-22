@@ -1,6 +1,6 @@
 /* 由「同步页面.bat」自动生成：从 index.html 抽取的页面文案，优先级高于 data.js。
  * 改完 index.html 双击 同步页面.bat 即可，不用手改这个文件。
- * 生成时间：2026-11-22 18:03:22
+ * 生成时间：2026-11-22 18:17:39
  */
 window.MC_PAGE_TEXT = {
   "content": {
@@ -64,8 +64,8 @@ window.MC_PAGE_TEXT = {
       "items": [
         {
           "title": "旗舰处理器",
-          "desc": "AMD Ryzen 9 9950X3D，3D V-Cache 大缓存，单核频率拉满，生电与怪物 AI 都不掉 TPS",
-          "value": "Ryzen 9 9950X3D",
+          "desc": "Intel Core Ultra 9 285K，24 核 24 线程、睿频 5.7GHz，单核频率拉满，生电与怪物 AI 都不掉 TPS",
+          "value": "Ultra 9 285K",
           "icon": "./png/CPU.png"
         },
         {
